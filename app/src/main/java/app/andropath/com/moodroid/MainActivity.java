@@ -20,11 +20,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
-        // kita set default nya Home Fragment
         loadFragment(new HomeFragment());
-        // inisialisasi BottomNavigaionView
         BottomNavigationView bottomNavigationView = findViewById(R.id.bn_main);
-        // beri listener pada saat item/menu bottomnavigation terpilih
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
     }
 
@@ -47,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 break;
             case R.id.search_menu:
                 Intent i = new Intent(MainActivity.this,ScanActivity.class);
-                startActivity(i);
+                startActivityForResult(i,100);
             /*case R.id.favorite_menu:
                 fragment = new FavoriteFragment();
                 break;*/
@@ -56,5 +53,22 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 break;
         }
         return loadFragment(fragment);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK) {
+            if(requestCode==100){
+                String datas = data.getStringExtra("data");
+                if(datas!=null) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("edttext", datas);
+                    AccountFragment fragobj = new AccountFragment();
+                    fragobj.setArguments(bundle);
+                    loadFragment(fragobj);
+                }
+            }
+        }
     }
 }

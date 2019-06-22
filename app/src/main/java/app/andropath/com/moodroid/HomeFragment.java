@@ -18,7 +18,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.fragment_home, container, false);
         WebView mWebView = (WebView) v.findViewById(R.id.webview);
-        mWebView.loadUrl("http://172.20.10.4:8080/skripsi/mooview/");
+        mWebView.loadUrl("http://103.4.165.137/yosua/mooview/");
 
         // Enable Javascript
         WebSettings webSettings = mWebView.getSettings();
